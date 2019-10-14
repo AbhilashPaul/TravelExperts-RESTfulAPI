@@ -29,13 +29,13 @@ public class Package implements Serializable {
 	@Column(length=50)
 	private String pkgDesc;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date pkgEndDate;
 
 	@Column(nullable=false, length=50)
 	private String pkgName;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date pkgStartDate;
 
 	@Column(nullable=false, length=1)

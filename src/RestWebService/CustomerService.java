@@ -47,7 +47,7 @@ public class CustomerService {
 	//URL: http://localhost:8181/TravelExperts/rs/customer/updatecustomer
 	@PUT
 	@Path("/updatecustomer")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes (MediaType.APPLICATION_JSON)
 	public String putAgent(String jsonString) {
 		Gson gson = new Gson();
@@ -71,7 +71,7 @@ public class CustomerService {
 			existingCustomer.setCustHomePhone(cust.getCustHomePhone());
 			existingCustomer.setCustEmail(cust.getCustEmail());
 			existingCustomer.setCustUsername(cust.getCustUsername());
-			existingCustomer.setCustPassword(BCrypt.hashpw(cust.getCustPassword(), BCrypt.gensalt()));
+			existingCustomer.setCustPassword(cust.getCustPassword());
 			
 			//update persistence context
 			em.persist(existingCustomer);
@@ -79,7 +79,7 @@ public class CustomerService {
 			
 			//close entity manager
 			em.close();
-			return "Successfully updated";
+			return jsonString;
 		}else {
 			return "Error while trying to update. Please try again!";
 		}
@@ -107,7 +107,7 @@ public class CustomerService {
 		}
 	}
 	
-	//URL: http://localhost:8181/TravelExperts/rs/customer/updatecustomer
+	//URL: http://localhost:8181/TravelExperts/rs/customer/createcustomer
 	@POST
 	@Path("/createcustomer")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -116,7 +116,9 @@ public class CustomerService {
 		Gson gson = new Gson();
 		EntityManager em = Persistence.createEntityManagerFactory("TravelExperts").createEntityManager();
 		
+		//password must be encrypted at client side
 		Customer cust = gson.fromJson(jsonString, Customer.class);
+		
 		
 		if(cust != null) {
 			em.getTransaction().begin();

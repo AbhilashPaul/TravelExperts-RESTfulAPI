@@ -27,6 +27,7 @@ public class LoginService {
 	public String authenticateUser(String authenticationString) {
 		
 		Gson gson = new Gson();
+		String JSONString=null;
 		EntityManager em = Persistence.createEntityManagerFactory("TravelExperts").createEntityManager();
 		//convert user info from client to customer client
 		Customer user = gson.fromJson(authenticationString, Customer.class);
@@ -36,12 +37,12 @@ public class LoginService {
 		query.setParameter("username", user.getCustUsername());
 		Customer cust = query.getSingleResult();
 		
-		//verify user credentials
+		//verify user credentials 
 		if(BCrypt.checkpw(user.getCustPassword().trim(),cust.getCustPassword().trim())) {
-			//return the customer details as json string
-			return gson.toJson(cust);
-		} else {
-			return "Invalid Login! Please try again.";
-		}
+			
+			JSONString=gson.toJson(cust);
+		} 
+		//return the customer details as json string
+		return JSONString;
 	}
 }
