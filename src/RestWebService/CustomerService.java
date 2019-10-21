@@ -93,7 +93,6 @@ public class CustomerService {
 		Gson gson = new Gson();
 		EntityManager em = Persistence.createEntityManagerFactory("TravelExperts").createEntityManager();
 		
-		
 		TypedQuery<Bookingdetail> query =
 		em.createQuery("SELECT b FROM Bookingdetail b WHERE b.booking.customerId=:id GROUP BY b.booking.bookingId",
 		Bookingdetail.class); query.setParameter("id", customerId);

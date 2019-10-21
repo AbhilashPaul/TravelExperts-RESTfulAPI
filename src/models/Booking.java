@@ -27,15 +27,6 @@ public class Booking implements Serializable {
 
 	private int packageId;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date passengerDOB;
-
-	private String passengerFName;
-
-	private String passengerLName;
-
-	private String passengerMName;
-
 	private double travelerCount;
 
 	private String tripTypeId;
@@ -81,38 +72,6 @@ public class Booking implements Serializable {
 
 	public void setPackageId(int packageId) {
 		this.packageId = packageId;
-	}
-
-	public Date getPassengerDOB() {
-		return this.passengerDOB;
-	}
-
-	public void setPassengerDOB(Date passengerDOB) {
-		this.passengerDOB = passengerDOB;
-	}
-
-	public String getPassengerFName() {
-		return this.passengerFName;
-	}
-
-	public void setPassengerFName(String passengerFName) {
-		this.passengerFName = passengerFName;
-	}
-
-	public String getPassengerLName() {
-		return this.passengerLName;
-	}
-
-	public void setPassengerLName(String passengerLName) {
-		this.passengerLName = passengerLName;
-	}
-
-	public String getPassengerMName() {
-		return this.passengerMName;
-	}
-
-	public void setPassengerMName(String passengerMName) {
-		this.passengerMName = passengerMName;
 	}
 
 	public double getTravelerCount() {
