@@ -8,6 +8,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 import com.google.gson.Gson;
 import models.Booking;
 import models.Bookingdetail;
@@ -20,9 +23,8 @@ public class BookingService {
 	//URL: http://localhost:8181/TravelExperts/rs/booking/makeabooking
 	@POST
 	@Path("/makeabooking")
-	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String makeABooking(String jsonString) {
+	public Response makeABooking(String jsonString) {
 		Gson gson = new Gson();
 		EntityManager em = Persistence.createEntityManagerFactory("TravelExperts").createEntityManager();
 		
@@ -56,9 +58,9 @@ public class BookingService {
 			//close entity manager
 			em.close();
 			
-			return "Congratulations! Your trip is booked";
+			return Response.status(Response.Status.OK).build();
 		}else {
-			return "Error while booking. Please try again!";
+			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
 	}
 	
